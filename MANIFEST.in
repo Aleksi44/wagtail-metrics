@@ -1,0 +1,5 @@
+include *.rst
+include AUTHORS
+include LICENSE
+recursive-include wagtail_metrics/templates *.html
+recursive-include wagtail_metrics/static *

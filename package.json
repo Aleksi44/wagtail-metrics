@@ -1,0 +1,8 @@
+{
+  "name": "wagtail-metrics",
+  "version": "0.0.0",
+  "repository": "git@github.com:Aleksi44/wagtail-metrics.git",
+  "author": "Alexis LE BARON <hello@snoweb.io>",
+  "license": "GPL-3.0",
+  "dependencies": {}
+}

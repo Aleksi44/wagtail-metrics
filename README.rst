@@ -2,6 +2,12 @@
 Wagtail Metrics
 ***************
 
+.. image:: https://img.shields.io/pypi/v/wagtail_metrics
+    :target: https://pypi.org/project/wagtail_metrics/
+
+.. image:: https://img.shields.io/pypi/pyversions/wagtail_metrics
+    :target: https://pypi.org/project/wagtail_metrics/
+
 Wagtail Metrics allows you to retrieve information about Wagtail pages.
 
 Information providers for Wagtail pages are :

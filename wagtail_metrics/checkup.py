@@ -25,7 +25,11 @@ class Checkup:
 
     @staticmethod
     def _get_provider_module(provider_name):
-        return __import__('wagtail_metrics.providers.%s' % provider_name, fromlist=['function'])
+        return __import__(
+            'wagtail_metrics.providers.%s' % provider_name,
+            fromlist=['function'],
+            globals=globals()
+        )
 
     def add_page(self, page):
         if not isinstance(page, Page):

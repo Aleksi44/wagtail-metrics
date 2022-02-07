@@ -19,7 +19,7 @@ Information providers for Wagtail pages are :
 Usage
 #####
 
-You can use Wagtail Metric like this :
+You can use Wagtail Metrics like this :
 
 .. code-block:: python
 
@@ -33,7 +33,7 @@ You can use Wagtail Metric like this :
     ])
     for site in Site.objects.all():
         checkup.add_site(site)
-    checkup_json = self.checkup.to_json()
+    checkup_json = checkup.to_json()
 
 **checkup_json** is equal to :
 

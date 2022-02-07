@@ -28,7 +28,7 @@ class Checkup:
         return __import__(
             'wagtail_metrics.providers.%s' % provider_name,
             fromlist=['function'],
-            globals=globals()
+            globals={"__name__": __name__}
         )
 
     def add_page(self, page):

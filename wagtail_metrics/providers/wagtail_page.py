@@ -77,15 +77,23 @@ def run(checkup, page):
                 checkup,
                 attribute.stream_block,
                 initialize=True,
-                key=attribute.name
+                key=(
+                    constants.WAGTAIL_METRICS_STREAM_FIELD_KEY if
+                    constants.WAGTAIL_METRICS_STREAM_FIELD_KEY else attribute.name
+                )
             )
     for attribute in page._meta.get_fields():
         try:
             block = getattr(page, attribute.name)
+            if isinstance(block, StreamValue):
+                key = constants.WAGTAIL_METRICS_STREAM_FIELD_KEY if \
+                    constants.WAGTAIL_METRICS_STREAM_FIELD_KEY else attribute.name
+            else:
+                key = attribute.name
             _inspect_field(
                 checkup,
                 block,
-                key=attribute.name,
+                key=key,
                 page=page
             )
         except AttributeError:

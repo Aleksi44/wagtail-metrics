@@ -1,5 +1,6 @@
 import json
 import logging
+from importlib import import_module
 from django.conf import settings
 from wagtail.core.models import Page, Site
 from wagtail_metrics.metric import Metric
@@ -25,8 +26,7 @@ class Checkup:
 
     @staticmethod
     def _get_provider_module(provider_name):
-        importlib = __import__('importlib')
-        return importlib.import_module('wagtail_metrics.providers.%s' % provider_name)
+        return import_module('wagtail_metrics.providers.%s' % provider_name)
 
     def add_page(self, page):
         if not isinstance(page, Page):

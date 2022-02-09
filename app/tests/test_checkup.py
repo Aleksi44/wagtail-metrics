@@ -34,6 +34,7 @@ class TestCheckup(TestCase):
             title="Wagtail",
             slug='wagtail',
             char_field="Test char field",
+            seo_title="Wagtail CMS, les fonctionnalités et les modules à utiliser absolument",
             stream_field=[
                 ('block', {
                     'title': "generic title",
@@ -106,6 +107,12 @@ class TestCheckup(TestCase):
             3,
             self.checkup_dict[field_status_code_name]['counter']
         )
+
+    def test_seo_title_value_limit(self):
+        self.assertIn('seo_title', self.checkup_dict)
+        for seo_title, _ in self.checkup_dict['seo_title']['values'].items():
+            if seo_title:
+                self.assertGreater(len(seo_title), constants.WAGTAIL_METRICS_VALUE_LIMIT + len('...'))
 
     def test_write_file_json(self):
         f = open("metrics.json", "w")

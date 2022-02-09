@@ -1,4 +1,5 @@
 from django.utils.text import slugify
+from wagtail_metrics import constants
 
 LIMIT_VALUE = 50
 
@@ -22,8 +23,9 @@ class Metric:
         self.counter += 1
         if not isinstance(value, str):
             value = slugify(value)
-        if len(value) > LIMIT_VALUE:
-            value = value[:LIMIT_VALUE] + '...'
+        if self.key not in constants.WAGTAIL_METRICS_VALUE_LIMIT_EXCLUDE:
+            if len(value) > constants.WAGTAIL_METRICS_VALUE_LIMIT:
+                value = value[:constants.WAGTAIL_METRICS_VALUE_LIMIT] + '...'
         if value in self.values:
             self.values[value]['counter'] += 1
         else:

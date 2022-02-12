@@ -39,10 +39,14 @@ class Checkup:
             except WagtailMetricsException as err:
                 logger.error(str(err))
 
-    def add_site(self, site):
+    def add_site(self, site, exclude_offline=True):
         if not isinstance(site, Site):
             return
-        for page in site.root_page.get_descendants(inclusive=True).specific():
+        if exclude_offline:
+            site_query = site.root_page.get_descendants(inclusive=True).live().public().specific()
+        else:
+            site_query = site.root_page.get_descendants(inclusive=True).specific()
+        for page in site_query:
             self.add_page(page)
             if self.i18n_enable:
                 for page_alternate in page.get_translations().exclude(alias_of__isnull=False):

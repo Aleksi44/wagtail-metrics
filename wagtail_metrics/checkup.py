@@ -28,7 +28,7 @@ class Checkup:
     def _get_provider_module(provider_name):
         return import_module('wagtail_metrics.providers.%s' % provider_name)
 
-    def add_page(self, page):
+    def _add_page(self, page):
         if not isinstance(page, Page):
             return
         for provider_name in self.providers:
@@ -39,6 +39,12 @@ class Checkup:
             except WagtailMetricsException as err:
                 logger.error(str(err))
 
+    def add_page(self, page):
+        self._add_page(page)
+        if self.i18n_enable:
+            for page_alternate in page.get_translations().exclude(alias_of__isnull=False):
+                self._add_page(page_alternate)
+
     def add_site(self, site, exclude_offline=True):
         if not isinstance(site, Site):
             return
@@ -48,9 +54,6 @@ class Checkup:
             site_query = site.root_page.get_descendants(inclusive=True).specific()
         for page in site_query:
             self.add_page(page)
-            if self.i18n_enable:
-                for page_alternate in page.get_translations().exclude(alias_of__isnull=False):
-                    self.add_page(page_alternate)
 
     def add_metric(self, key, value, page_url=None, initialize=False):
         if key not in constants.WAGTAIL_METRICS_DEFAULT_EXCLUDE:

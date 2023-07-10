@@ -1,5 +1,5 @@
 Django==4.0.2
-wagtail==2.16
+wagtail==5.0.2
 flake8==4.0.1
 requests==2.27.1
 django-environ==0.8.1

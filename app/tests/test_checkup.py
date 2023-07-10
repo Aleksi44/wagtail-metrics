@@ -1,5 +1,5 @@
 from django.test import TestCase
-from wagtail.core.models import Site
+from wagtail.models import Site
 from wagtail_metrics.checkup import Checkup
 from wagtail_metrics import constants
 from app.models import HomePage

@@ -2,7 +2,7 @@ import json
 import logging
 from importlib import import_module
 from django.conf import settings
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 from wagtail_metrics.metric import Metric
 from wagtail_metrics import constants
 from wagtail_metrics.exceptions import WagtailMetricsException

@@ -1,5 +1,5 @@
-from wagtail.core.fields import StreamValue, StreamBlock, StreamField
-from wagtail.core.blocks import StructValue, StructBlock
+from wagtail.fields import StreamValue, StreamBlock, StreamField
+from wagtail.blocks import StructValue, StructBlock
 from wagtail_metrics import constants
 
 
